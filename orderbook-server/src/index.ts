@@ -128,6 +128,8 @@ function fillOrder(orderId: string, price: number, quantity: number, side: "buy"
  
      console.log("OrderId",orderbook);
 
+     
+
     return {
         status: 'accepted',
         executedQty,

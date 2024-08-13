@@ -8,4 +8,5 @@ export const OrderInputSchema = z.object({
   side: z.enum(['buy', 'sell']),
   type: z.enum(['limit', 'market']),
   kind: z.enum(['ioc']).optional(),
+  
 });
