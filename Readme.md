@@ -1,0 +1,1 @@
+Just a normal trading exchenge made using Nodejs
