@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import { Tickers } from "../utils/types";
+import Image from "next/image";
 
 export const Markets = () => {
 
@@ -17,7 +18,7 @@ export const Markets = () => {
           <div className="flex flex-col full rounded-lg bg-baseBackgroundL1 px-5 py-3">
               <table className="w-full table-auto">
                   <MarketHeader />
-                  {tickers?.map((m) => <MarketRow market={m} />)}
+                  {tickers?.map((m) => <MarketRow key={m.symbol} market={m} />)}
               </table>
           </div>
         </div>
@@ -32,10 +33,10 @@ function MarketRow({market}: {market: Tickers}) {
          <td className="flex-shrink">
             <div className="flex items-center undefined">
                 <div className="reletive flex-none overflow-hidden rounded-full border border-baseBorderMed" 
-                style={{widows: "400px", height: "40px"}}
+                style={{width: "400px", height: "40px"}}
                 >
                   <div className="relative">
-                  <img
+                  <Image
                   alt={market.symbol}
                   src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVvBqZC_Q1TSYObZaMvK0DRFeHZDUtVMh08Q&s"}
                   loading="lazy"
@@ -44,6 +45,7 @@ function MarketRow({market}: {market: Tickers}) {
                   decoding="async"
                   data-nimg="1"
                   className=""
+                
                 />
                   </div>
                 </div>
@@ -97,7 +99,7 @@ function MarketHeader () {
                     Market Cap <span className="w-[16px]"></span>
                   </div>
             </th>
-            <th className="px-2 py-3 text=left text-sm font-normal text-baseTextMedEmphasis">
+            <th className="px-2 py-3 text-left text-sm font-normal text-baseTextMedEmphasis">
                 <div className="flex items-center gap-1 cursor-pointer select-none">
                   24h Volume 
                   <svg
@@ -107,9 +109,9 @@ function MarketHeader () {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="lucide lucide-arrow-down h-4 w-4"
               >
                 <path d="M12 5v14"></path>
