@@ -1,12 +1,10 @@
 import { Markets } from '@/app/components/Markets'
 import React from 'react'
 
-const Home = () => {
+export default function Home() {
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
+    <main className='flex min-h-screen flex-col items-center justify-between p-24 bg-white'>
          <Markets />
     </main>
   )
 }
-
-export default Home
