@@ -9,7 +9,7 @@ export const Appbar = () => {
     const route = usePathname();
     const router = useRouter()
 
-    return <div className="text-white border-b border-slate-800 bg-green-400">
+    return <div className="text-white border-b border-slate-800 filter backdrop-blur-sm">
         <div className="flex justify-between items-center p-2">
             <div className="flex">
                 <div className={`text-xl pl-4 flex flex-col justify-center cursor-pointer text-white`} onClick={() => router.push('/')}>
