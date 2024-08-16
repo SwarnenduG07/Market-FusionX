@@ -1,4 +1,4 @@
-import Markets from '@/components/Markets'
+import { Markets } from '@/app/components/Markets'
 import React from 'react'
 
 const Home = () => {
