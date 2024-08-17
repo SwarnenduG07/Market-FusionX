@@ -4,14 +4,15 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import { Tickers } from "../utils/types";
 import Image from "next/image";
+import { getTickers } from "../utils/httpClient";
 
 export const Markets = () => {
 
   const [tickers, setTickers] = useState<Tickers[]>()
 
-  // useEffect(() => {
-  //     getTickers().then((m) => setTickers(m))
-  // },[])
+  useEffect(() => {
+      getTickers().then((m) => setTickers(m))
+  },[])
   return (
     <div className="flex flex-col flex-1 max-w-[1280px] w-full">
         <div className="flex flex-col min-w-[700px] flex-1 w-full">

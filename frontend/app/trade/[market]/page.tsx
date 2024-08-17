@@ -1,6 +1,7 @@
 "use client"
 import { Depth } from '@/app/components/Depth'
 import { MarketBar } from '@/app/components/MarketBar'
+import { SwapUI } from '@/app/components/Swap'
 import { TradeView } from '@/app/components/TradeView'
 import { useParams } from 'next/navigation'
 import React from 'react'
@@ -20,6 +21,12 @@ export default function Page ()  {
              </div>
           </div>
        </div>
+       <div className="w-[10px] flex-col border-slate-800 border-l"></div>
+        <div>
+            <div className="flex flex-col w-[250px]">
+                <SwapUI market={market as string} />
+            </div>
+        </div>
     </div>
   )
 }
