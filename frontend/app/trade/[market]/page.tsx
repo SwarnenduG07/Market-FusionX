@@ -9,7 +9,11 @@ export default function Page ()  {
     <div className='flex flex-row flex-1'>
        <div className='flex flex-col flex-1'>
           <MarketBar market={market as string} /> 
-          hi there
+          <div className='flex flex-row h-[920px] border-y border-red-500'>
+             <div className='flex flex-col flex-1'>
+
+             </div>
+          </div>
        </div>
     </div>
   )

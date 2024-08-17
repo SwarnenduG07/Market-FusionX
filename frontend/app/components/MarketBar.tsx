@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Tickers } from '../utils/types'
 import Image from 'next/image'
 
@@ -7,8 +7,12 @@ export const MarketBar = ({market}: {market: string}) => {
 
   const [ticker, setTicker] = useState<Tickers | null>(null)
 
+  // useEffect(() => {
+  //     Sin
+  // }, [market])
+
   return (
-    <div className="flex items-center flex-row relative w-full overflow-hidden border-b border-slate-800">
+    <div className="flex items-center flex-row relative w-full overflow-hidden border-b border-purple-600 border-t-teal-500">
             <div className="flex items-center justify-between flex-row no-scrollbar overflow-auto pr-4">
                     <Ticker market={market} />
                     <div className="flex items-center flex-row space-x-8 pl-4">
@@ -17,18 +21,18 @@ export const MarketBar = ({market}: {market: string}) => {
                             <p className="font-medium text-sm tabular-nums">${ticker?.lastPrice}</p>
                         </div>
                         <div className="flex flex-col">
-                            <p className={`font-medium text-xs text-slate-400 text-sm`}>24H Change</p>
+                            <p className={`font-medium  text-slate-400 text-sm mb-2`}>24H Change</p>
                             <p className={`font-medium tabular-nums leading-5 text-sm text-greenText ${Number(ticker?.priceChange) > 0 ? "text-green-500" : "text-red-500"}`}>{Number(ticker?.priceChange) > 0 ? "+" : ""} {ticker?.priceChange} {Number(ticker?.priceChangePercent)?.toFixed(2)}%</p></div><div className="flex flex-col">
-                                <p className="font-medium text-slate-400 text-sm">24H High</p>
+                                <p className="font-medium text-slate-400 text-sm mb-6">24H High</p>
                                 <p className="text-sm font-medium tabular-nums leading-5 ">{ticker?.high}</p>
                                 </div>
                                 <div className="flex flex-col">
-                                    <p className="font-medium text-slate-400 text-sm">24H Low</p>
+                                    <p className="font-medium text-slate-400 text-sm mb-5">24H Low</p>
                                     <p className="font-medium tabular-nums leading-5 text-sm ">{ticker?.low}</p>
                                 </div>
-                            <button type="button" className="font-medium transition-opacity hover:opacity-80 hover:cursor-pointer text-base text-left" data-rac="">
+                          <button type="button" className="font-medium     transition-opacity hover:opacity-80 hover:cursor-pointer text-base text-left" data-rac="">
                                 <div className="flex flex-col">
-                                    <p className="font-medium  text-slate-400 text-sm">24H Volume</p>
+                                    <p className="font-medium  text-slate-400 text-sm mb-3">24H Volume</p>
                                     <p className="mt-1  font-medium tabular-nums leading-5 text-sm ">{ticker?.volume}
                                 </p>
                             </div>
