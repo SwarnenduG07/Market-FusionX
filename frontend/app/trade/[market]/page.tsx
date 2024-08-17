@@ -1,5 +1,6 @@
 "use client"
-import { Depth } from '@/app/components/Depth'
+
+import { Depth } from '@/app/components/Depth/Depth'
 import { MarketBar } from '@/app/components/MarketBar'
 import { SwapUI } from '@/app/components/Swap'
 import { TradeView } from '@/app/components/TradeView'

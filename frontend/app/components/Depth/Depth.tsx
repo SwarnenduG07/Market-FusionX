@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SignalingManager } from "../utils/SignalingManager";
-import { getDepth, getTicker, getTrades } from "../utils/httpClient";
-import { AskTable } from "./Depth/AskTable";
-import { BidTable } from "./Depth/BidTable";
+import { SignalingManager } from "../../utils/SignalingManager";
+import { getDepth, getTicker, getTrades } from "../../utils/httpClient";
+import { AskTable } from "./AskTable";
+import { BidTable } from "./BidTable";
 
 
 export function Depth({ market }: {market: string}) {
