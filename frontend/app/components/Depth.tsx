@@ -82,7 +82,7 @@ export function Depth({ market }: {market: string}) {
             SignalingManager.getInstance().sendMessage({"method":"UNSUBSCRIBE","params":[`depth@${market}`]});
             SignalingManager.getInstance().deRegisterCallback("depth", `DEPTH-${market}`);
         }
-    }, [])
+    }, [market])
     
     return <div>
         <TableHeader />
