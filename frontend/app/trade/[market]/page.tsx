@@ -1,5 +1,5 @@
 "use client"
-import MarketBar from '@/app/components/MarketBar'
+import { MarketBar } from '@/app/components/MarketBar'
 import { useParams } from 'next/navigation'
 import React from 'react'
 
