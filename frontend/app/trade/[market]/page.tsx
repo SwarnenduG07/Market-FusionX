@@ -1,4 +1,5 @@
 "use client"
+import { Depth } from '@/app/components/Depth'
 import { MarketBar } from '@/app/components/MarketBar'
 import { TradeView } from '@/app/components/TradeView'
 import { useParams } from 'next/navigation'
@@ -15,7 +16,7 @@ export default function Page ()  {
                  <TradeView market={market as string} />
              </div>
              <div className='flex flex-col w-[250px] overflow-hidden'>
-               {/* <Depth /> */}
+               <Depth market={market as string} />
              </div>
           </div>
        </div>
