@@ -33,8 +33,8 @@ function MarketRow({market}: {market: Tickers}) {
        <tr className="cursor-pointer border-t border-baseBorderLight hover:bg-white/7 w-full"onClick={() => router.push(`/trade/${market.symbol}`)} >
          <td className="flex-shrink">
             <div className="flex items-center undefined">
-                <div className="reletive flex-none overflow-hidden rounded-full border border-baseBorderMed" 
-                style={{width: "400px", height: "40px"}}
+                <div className="relative flex-none overflow-hidden rounded-full border border-baseBorderMed" 
+                style={{width: "40px", height: "40px"}}
                 >
                   <div className="relative">
                   <Image
@@ -44,8 +44,8 @@ function MarketRow({market}: {market: Tickers}) {
                   width="40"
                   height="40"
                   decoding="async"
-                  data-nimg="1"
-                  className=""
+                
+                
                 
                 />
                   </div>
