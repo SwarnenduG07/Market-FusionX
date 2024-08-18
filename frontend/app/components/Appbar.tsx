@@ -12,10 +12,10 @@ export const Appbar = () => {
     return <div className="text-white border-b border-slate-800 filter backdrop-blur-sm">
         <div className="flex justify-between items-center p-2">
             <div className="flex">
-                <div className={`text-xl pl-4 flex flex-col justify-center cursor-pointer text-white`} onClick={() => router.push('/')}>
-                    Exchange
+                <div className={`text-xl pl-4 flex flex-col font-bold justify-center cursor-pointer text-red-600  font-serif ml-6`}>
+                    MARKET FUSION
                 </div>
-                <div className={`text-sm pt-1 flex flex-col justify-center pl-8 cursor-pointer ${route.startsWith('/markets') ? 'text-white' : 'text-slate-500'}`} onClick={() => router.push('/markets')}>
+                <div className={`text-sm pt-1 flex flex-col justify-center pl-8 cursor-pointer ${route.startsWith('/') ? 'text-white' : 'text-slate-500'}`} onClick={() => router.push('/')}>
                     Markets
                 </div>
                 <div className={`text-sm pt-1 flex flex-col justify-center pl-8 cursor-pointer ${route.startsWith('/trade') ? 'text-white' : 'text-slate-500'}`} onClick={() => router.push('/trade/SOL_USDC')}>
