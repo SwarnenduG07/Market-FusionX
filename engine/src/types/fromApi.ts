@@ -12,7 +12,7 @@ export type MessageFromApi = {
         price: string,
         quantity: string,
         side: "buy" | "sell",
-        userID: string,
+        userId: string,
     },
 
 } | {

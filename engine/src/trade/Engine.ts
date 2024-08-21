@@ -1,6 +1,7 @@
 import fs from "fs";
 
 import { Orderbook } from "./Orderbook";
+import { CREATE_ORDER, MessageFromApi } from "../types/fromApi";
 
  export const BASE_CURRENCY = "INR";
 
@@ -45,4 +46,19 @@ import { Orderbook } from "./Orderbook";
         }
         fs.writeFileSync("./snapshot/json", JSON.stringify(snapshot));
     }
+    process({message. clientId}: {message: MessageFromApi, clientId: string}) {
+
+        switch (message.type) {
+            case CREATE_ORDER:
+                try {
+                   const {executedQty, fills, orderId} = this.createOrder(message.data.market, message.data.price,message.data.quantity,message.data.side,message.data.userId);
+                   redisManager.getInd
+                } catch (e) {
+                    console.log(e);
+                    
+                }
+        }
+    }
+
   }
+   
