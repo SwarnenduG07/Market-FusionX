@@ -36,7 +36,7 @@ export type MessageFromApi = {
 } | {
     type: typeof GET_OPEN_ORDERS,
     data: {
-        userID: string,
+        userId: string,
         market : string,
     }
 }
