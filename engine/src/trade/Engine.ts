@@ -1,8 +1,9 @@
 import fs from "fs";
-import { RedisManager } from "../RedisManager";
+
 import { ORDER_UPDATE, TRADE_ADDED } from "../types/index";
 import { CANCEL_ORDER, CREATE_ORDER, GET_DEPTH, GET_OPEN_ORDERS, MessageFromApi, ON_RAMP } from "../types/fromApi";
 import { Fill, Order, Orderbook } from "./Orderbook";
+import { redisManager } from "../RedisManager";
 
 //TODO: Avoid floats everywhere, use a decimal similar to the PayTM project for every currency
 export const BASE_CURRENCY = "INR";
@@ -54,7 +55,7 @@ export class Engine {
             case CREATE_ORDER:
                 try {
                     const { executedQty, fills, orderId } = this.createOrder(message.data.market, message.data.price, message.data.quantity, message.data.side, message.data.userId);
-                    RedisManager.getInstance().sendToApi(clientId, {
+                    redisManager.getInstance().sendToApi(clientId, {
                         type: "ORDER_PLACED",
                         payload: {
                             orderId,
@@ -64,7 +65,7 @@ export class Engine {
                     });
                 } catch (e) {
                     console.log(e);
-                    RedisManager.getInstance().sendToApi(clientId, {
+                    redisManager.getInstance().sendToApi(clientId, {
                         type: "ORDER_CANCELLED",
                         payload: {
                             orderId: "",
@@ -112,7 +113,7 @@ export class Engine {
                         }
                     }
 
-                    RedisManager.getInstance().sendToApi(clientId, {
+                    redisManager.getInstance().sendToApi(clientId, {
                         type: "ORDER_CANCELLED",
                         payload: {
                             orderId,
@@ -134,7 +135,7 @@ export class Engine {
                     }
                     const openOrders = openOrderbook.getOpenOrders(message.data.userId);
 
-                    RedisManager.getInstance().sendToApi(clientId, {
+                    redisManager.getInstance().sendToApi(clientId, {
                         type: "OPEN_ORDERS",
                         payload: openOrders
                     }); 
@@ -154,13 +155,13 @@ export class Engine {
                     if (!orderbook) {
                         throw new Error("No orderbook found");
                     }
-                    RedisManager.getInstance().sendToApi(clientId, {
+                    redisManager.getInstance().sendToApi(clientId, {
                         type: "DEPTH",
                         payload: orderbook.getDepth()
                     });
                 } catch (e) {
                     console.log(e);
-                    RedisManager.getInstance().sendToApi(clientId, {
+                    redisManager.getInstance().sendToApi(clientId, {
                         type: "DEPTH",
                         payload: {
                             bids: [],
@@ -208,7 +209,7 @@ export class Engine {
     }
 
     updateDbOrders(order: Order, executedQty: number, fills: Fill[], market: string) {
-        RedisManager.getInstance().pushMessage({
+        redisManager.getInstance().pushMessage({
             type: ORDER_UPDATE,
             data: {
                 orderId: order.orderId,
@@ -221,7 +222,7 @@ export class Engine {
         });
 
         fills.forEach(fill => {
-            RedisManager.getInstance().pushMessage({
+            redisManager.getInstance().pushMessage({
                 type: ORDER_UPDATE,
                 data: {
                     orderId: fill.markerOrderId,
@@ -233,7 +234,7 @@ export class Engine {
 
     createDbTrades(fills: Fill[], market: string, userId: string) {
         fills.forEach(fill => {
-            RedisManager.getInstance().pushMessage({
+            redisManager.getInstance().pushMessage({
                 type: TRADE_ADDED,
                 data: {
                     market: market,
@@ -250,7 +251,7 @@ export class Engine {
 
     publishWsTrades(fills: Fill[], userId: string, market: string) {
         fills.forEach(fill => {
-            RedisManager.getInstance().publishMessage(`trade@${market}`, {
+            redisManager.getInstance().publishMessage(`trade@${market}`, {
                 stream: `trade@${market}`,
                 data: {
                     e: "trade",
@@ -273,7 +274,7 @@ export class Engine {
         const updatedBids = depth?.bids.filter(x => x[0] === price);
         const updatedAsks = depth?.asks.filter(x => x[0] === price);
         
-        RedisManager.getInstance().publishMessage(`depth@${market}`, {
+        redisManager.getInstance().publishMessage(`depth@${market}`, {
             stream: `depth@${market}`,
             data: {
                 a: updatedAsks.length ? updatedAsks : [[price, "0"]],
@@ -293,7 +294,7 @@ export class Engine {
             const updatedAsks = depth?.asks.filter(x => fills.map(f => f.price).includes(x[0].toString()));
             const updatedBid = depth?.bids.find(x => x[0] === price);
             console.log("publish ws depth updates")
-            RedisManager.getInstance().publishMessage(`depth@${market}`, {
+            redisManager.getInstance().publishMessage(`depth@${market}`, {
                 stream: `depth@${market}`,
                 data: {
                     a: updatedAsks,
@@ -306,7 +307,7 @@ export class Engine {
            const updatedBids = depth?.bids.filter(x => fills.map(f => f.price).includes(x[0].toString()));
            const updatedAsk = depth?.asks.find(x => x[0] === price);
            console.log("publish ws depth updates")
-           RedisManager.getInstance().publishMessage(`depth@${market}`, {
+           redisManager.getInstance().publishMessage(`depth@${market}`, {
                stream: `depth@${market}`,
                data: {
                    a: updatedAsk ? [updatedAsk] : [],
