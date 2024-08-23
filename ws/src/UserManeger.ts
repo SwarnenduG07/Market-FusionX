@@ -1,6 +1,7 @@
-import { WebSocket } from "ws";
+import { WebSocket} from "ws";
+import { SubscriptionManager } from "./SubscriptionManeger";
 import { User } from "./User";
-import { SubscriptionManager } from "./SubscriptionManager";
+
 
 export class UserManager {
     private static instance: UserManager;
