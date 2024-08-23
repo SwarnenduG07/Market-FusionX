@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "redis": "^4.7.0",
     "websocket": "^1.0.35",
     "ws": "^8.18.0"
   },
